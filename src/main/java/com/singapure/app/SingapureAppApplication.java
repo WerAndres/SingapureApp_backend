@@ -30,4 +30,5 @@ public class SingapureAppApplication {
 		source.registerCorsConfiguration("/**", config);
 		return new CorsFilter(source);
 	}
+
 }

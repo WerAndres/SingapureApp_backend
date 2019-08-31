@@ -9,7 +9,7 @@ import com.singapure.app.models.Prueba;
 @RestController
 public class PruebaController {
 
-    @GetMapping("/prueba/{id}/{content}")
+    @GetMapping("/secured/api/prueba/{id}/{content}")
     public Prueba prueba(@PathVariable(value="id") int id, @PathVariable(value="content") String content) {
     	System.out.println("id: " + id);
     	System.out.println("content: " + content);
