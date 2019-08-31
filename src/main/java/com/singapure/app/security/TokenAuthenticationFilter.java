@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AbstractAuthenticationProcessingFilter;
@@ -32,7 +33,7 @@ public class TokenAuthenticationFilter extends AbstractAuthenticationProcessingF
 			throws AuthenticationException, IOException, ServletException {
 		AuthenticationToken token = validateHeader(request.getHeader(TOKEN_HEADER));
 		if (ObjectUtils.isEmpty(token)) {
-			throw new ServletException("401 - UNAUTHORIZED");
+			throw new BadCredentialsException("401 - UNAUTHORIZED");
 		}
 		return getAuthenticationManager().authenticate(token);
 	}

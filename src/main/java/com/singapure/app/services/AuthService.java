@@ -13,7 +13,7 @@ import com.singapure.app.repo.UserRepository;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 @Service
-public class LoginService {
+public class AuthService {
 	
 	@Autowired	
 	private UserRepository userRepository;
@@ -21,7 +21,7 @@ public class LoginService {
 	private static final long EXPIRATION_SECONDS = 6000;
 	private static final String SECURITY_KEY = "!@asdsadJAS780";
 	
-	public User login(User user) throws Exception{
+	public User auth(User user) throws Exception{
 		User userBD = userRepository.getUserByEmailAndPwd(user.getEmail(), user.getPassword());
 		if(userBD != null) {
 			
@@ -33,6 +33,16 @@ public class LoginService {
 		return userBD;
 	}
 	
+	public User createUser(User user) throws Exception{
+		User userBD = userRepository.save(user);
+		return userBD;
+	}
+	
+	public User getUser(User user) throws Exception{
+		User userBD = userRepository.findByEmail(user.getEmail());
+		return userBD;
+	}
+	
 	public AuthenticationToken generate(@RequestHeader("clientTxt") String clientTxt,
 			@RequestHeader("clientId") String clientId) {
 		return new AuthenticationToken(Jwts.builder().setSubject(clientTxt).claim("role", "USER")
@@ -40,6 +50,7 @@ public class LoginService {
 				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_SECONDS * 1000))
 				.signWith(SignatureAlgorithm.HS512, SECURITY_KEY).compact());
 	}
+	
 	
 
 
