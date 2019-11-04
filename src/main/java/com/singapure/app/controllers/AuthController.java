@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.CodeStatus;
-import com.singapure.app.models.User;
+import com.singapure.app.models.Usuarios;
 import com.singapure.app.services.AuthService;
 
 @RestController
@@ -19,8 +19,8 @@ public class AuthController {
 	AuthService authService;
 
 	@PostMapping("/auth")
-    public ResponseEntity<?> login(@RequestBody User user) throws Exception {
-    	User userRes = authService.auth(user);
+    public ResponseEntity<?> login(@RequestBody Usuarios user) throws Exception {
+    	Usuarios userRes = authService.auth(user);
     	if(userRes != null) {    		
     		return GenericResponse.ok(userRes);
     	}else {    		
@@ -29,12 +29,12 @@ public class AuthController {
     }
 	
 	@PostMapping("/auth/create")
-    public ResponseEntity<?> create(@RequestBody User user) throws Exception {
-		User userRes = authService.getUser(user);
+    public ResponseEntity<?> create(@RequestBody Usuarios user) throws Exception {
+		Usuarios userRes = authService.getUser(user);
 		if(userRes == null) {
 	    	userRes = authService.createUser(user);
 	    	if(userRes != null) {	
-	    		userRes.setId(null);
+	    		userRes.setIdUsuario(null);
 	    		userRes.setPassword(null);
 	    		return GenericResponse.ok(userRes);	    		
 	    	}else {
