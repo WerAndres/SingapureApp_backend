@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import com.singapure.app.dto.AuthenticationToken;
-import com.singapure.app.models.User;
-import com.singapure.app.repo.UserRepository;
+import com.singapure.app.models.Usuarios;
+import com.singapure.app.repo.UsuariosRepository;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -16,30 +16,36 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class AuthService {
 	
 	@Autowired	
-	private UserRepository userRepository;
+	private UsuariosRepository userRepository;
 	
 	private static final long EXPIRATION_SECONDS = 6000;
 	private static final String SECURITY_KEY = "!@asdsadJAS780";
 	
-	public User auth(User user) throws Exception{
-		User userBD = userRepository.getUserByEmailAndPwd(user.getEmail(), user.getPassword());
+	public Usuarios auth(Usuarios user) throws Exception{
+		Usuarios userBD = userRepository.getUserByEmailAndPwd(user.getEmail(), user.getPassword());
 		if(userBD != null) {
 			
-			AuthenticationToken tok = generate(userBD.getEmail(), userBD.getId()+"");
+			AuthenticationToken tok = generate(userBD.getEmail(), userBD.getIdUsuario()+"");
 			userBD.setToken(tok.getToken());
 			userBD.setPassword(null);
-			userBD.setId(null);
+			userBD.setIdUsuario(null);
 		}
 		return userBD;
 	}
 	
-	public User createUser(User user) throws Exception{
-		User userBD = userRepository.save(user);
+	public Usuarios createUser(Usuarios user) throws Exception{
+		if(user.getFechaActualizacion() == null) {
+			user.setFechaActualizacion(new Date());
+		}
+		if(user.getFechaCreacion() == null) {
+			user.setFechaCreacion(new Date());
+		}
+		Usuarios userBD = userRepository.save(user);
 		return userBD;
 	}
 	
-	public User getUser(User user) throws Exception{
-		User userBD = userRepository.findByEmail(user.getEmail());
+	public Usuarios getUser(Usuarios user) throws Exception{
+		Usuarios userBD = userRepository.findByEmail(user.getEmail());
 		return userBD;
 	}
 	

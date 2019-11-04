@@ -2,13 +2,15 @@ package com.singapure.app.models;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.SequenceGenerator;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -23,25 +25,35 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity    
-@Table(name = "users", schema = "prin") 
+@Table(name = "usuarios", schema = "prin") 
 @JsonInclude(Include.NON_NULL)	
-public class User implements Serializable {
+public class Usuarios implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@Id	
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="prin.user_id_seq")
-    @SequenceGenerator(name="prin.user_id_seq", sequenceName="prin.user_id_seq", allocationSize=1)
-	private Long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usu")
+	private Long idUsuario;
 	
-	@Column(name="name")
-	private String name;
+	@ManyToOne
+    @JoinColumn(name = "tipo_usu")
+    private TiposUsuarios tipoUsuario;
+	
+	@Column(name="fecha_crea")
+	private Date fechaCreacion;
+	
+	@Column(name="fecha_act")
+	private Date fechaActualizacion;
+	
+	@Column(name="email")
+	private String email;
 	
 	@Column(name="password")
 	private String password;
 	
-	@Column(name="email")
-	private String email;
+	@Column(name="nombre")
+	private String nombre;
 	
 	@Transient
 	private String token;
