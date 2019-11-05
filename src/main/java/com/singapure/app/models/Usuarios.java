@@ -55,6 +55,9 @@ public class Usuarios implements Serializable {
 	@Column(name="nombre")
 	private String nombre;
 	
+	@Column(name="photo")
+	public String photo;
+	
 	@Transient
 	private String token;
 	
