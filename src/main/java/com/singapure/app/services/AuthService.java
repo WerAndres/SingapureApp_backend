@@ -24,7 +24,6 @@ public class AuthService {
 	public Usuarios auth(Usuarios user) throws Exception{
 		Usuarios userBD = userRepository.getUserByEmailAndPwd(user.getEmail(), user.getPassword());
 		if(userBD != null) {
-			
 			AuthenticationToken tok = generate(userBD.getEmail(), userBD.getIdUsuario()+"");
 			userBD.setToken(tok.getToken());
 			userBD.setPassword(null);
