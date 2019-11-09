@@ -63,6 +63,9 @@ public class Usuarios implements Serializable {
 	
 	@Transient
 	private Collection<? extends GrantedAuthority> authorities;
+	
+	@Transient
+	private String keyEmail;
     
 
 }
