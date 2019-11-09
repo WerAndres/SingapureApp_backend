@@ -14,10 +14,12 @@ public class UsuariosService {
 	private UsuariosRepository usuariosRepository;
 	
 	public Usuarios updateUser(Usuarios usuario){
-		Usuarios usuarioSave = usuariosRepository.findByEmail(usuario.getEmail());
+		Usuarios usuarioSave = usuariosRepository.findByEmail(usuario.getKeyEmail());
 		usuarioSave.setFechaActualizacion(new Date());
 		usuarioSave.setNombre(usuario.getNombre() != null ? usuario.getNombre() : usuarioSave.getNombre());
-		usuarioSave.setPhoto(usuario.getPhoto() != null ? usuario.getPhoto() : usuarioSave.getPhoto());
+		usuarioSave.setPhoto(usuario.getPhoto() != null ? usuario.getPhoto() : usuarioSave.getPhoto());		
+		usuarioSave.setEmail(usuario.getKeyEmail().equals(usuarioSave.getEmail()) ? usuario.getKeyEmail() : usuario.getEmail());
+		
 		return usuariosRepository.save(usuarioSave);
 	}
 }
