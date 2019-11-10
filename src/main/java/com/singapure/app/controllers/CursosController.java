@@ -22,6 +22,11 @@ public class CursosController {
     	return GenericResponse.ok(CursosService.consultarCursos(cursos));
     }
 	
+	@PostMapping("/v1/cursosCrear")
+    public ResponseEntity<?> crearCursos(@RequestBody Cursos cursos) throws Exception {
+    	return GenericResponse.ok(CursosService.crearCursos(cursos));
+    }
+	
 	@PostMapping("/v1/cursosActualiza")
     public ResponseEntity<?> actualizarCursos(@RequestBody Cursos cursos) throws Exception {
     	return GenericResponse.ok(CursosService.actualizarCursos(cursos));

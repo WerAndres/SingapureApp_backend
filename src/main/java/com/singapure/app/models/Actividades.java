@@ -31,10 +31,10 @@ public class Actividades implements Serializable {
 	private Integer idActi;
 
 	@Column(name="fecha_act")
-	private Timestamp fechaAct;
+	private Date fechaAct;
 
 	@Column(name="fecha_crea")
-	private Timestamp fechaCrea;
+	private Date fechaCrea;
 
 	private String nombre;
 

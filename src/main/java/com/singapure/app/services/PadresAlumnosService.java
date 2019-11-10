@@ -5,25 +5,30 @@ import org.springframework.stereotype.Service;
 
 import com.singapure.app.models.PadresAlumnos;
 import com.singapure.app.repo.InteraccionesRepository;
-import com.singapure.app.repo.padresAlumnosRepository;
+import com.singapure.app.repo.PadresAlumnosRepository;
 
 @Service
 public class PadresAlumnosService {
 
 	@Autowired
-	private padresAlumnosRepository padresAlumnosRepository;
+	private PadresAlumnosRepository padresAlumnosRepository;
 	
-	public Object consultarpadresAlumnos(PadresAlumnos padresAlumnos) {
+	public Object consultarPadresAlumnos(PadresAlumnos padresAlumnos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object actualizarpadresAlumnos(PadresAlumnos padresAlumnos) {
+	public Object actualizarPadresAlumnos(PadresAlumnos padresAlumnos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public Object elimanarpadresAlumnos(PadresAlumnos padresAlumnos) {
+	public Object elimanarPadresAlumnos(PadresAlumnos padresAlumnos) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public Object crearPadresAlumnos(PadresAlumnos padresAlumnos) {
 		// TODO Auto-generated method stub
 		return null;
 	}

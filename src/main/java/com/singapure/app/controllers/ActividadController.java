@@ -24,6 +24,11 @@ public class ActividadController {
     	return GenericResponse.ok(actividadesService.consultarActividades(actividad));
     }
 	
+	@PostMapping("/v1/actividadesCrear")
+    public ResponseEntity<?> crearActividades(@RequestBody Actividades actividad) throws Exception {
+    	return GenericResponse.ok(actividadesService.crearActividades(actividad));
+    }
+	
 	@PostMapping("/v1/actividadesActualiza")
     public ResponseEntity<?> actualizarActividades(@RequestBody Actividades actividad) throws Exception {
     	return GenericResponse.ok(actividadesService.actualizarActividades(actividad));
