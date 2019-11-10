@@ -28,4 +28,9 @@ public class InteraccionesService {
 		return null;
 	}
 
+	public static Object crearInteracciones(Interacciones interacciones) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

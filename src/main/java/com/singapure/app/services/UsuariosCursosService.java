@@ -27,4 +27,9 @@ public class UsuariosCursosService {
 		return null;
 	}
 
+	public Object crearUsuariosCursos(UsuariosCursos usuarioCurso) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -22,6 +22,11 @@ public class UsuariosCursosController {
     	return GenericResponse.ok(usuariosCursosService.consultarUsuariosCursos(usuarioCurso));
     }
 	
+	@PostMapping("/v1/usuarioCursoCrear")
+    public ResponseEntity<?> crearUsuariosCursos(@RequestBody UsuariosCursos usuarioCurso) throws Exception {
+    	return GenericResponse.ok(usuariosCursosService.crearUsuariosCursos(usuarioCurso));
+    }
+	
 	@PostMapping("/v1/usuarioCursoActualiza")
     public ResponseEntity<?> actualizarUsuariosCursos(@RequestBody UsuariosCursos usuarioCurso) throws Exception {
     	return GenericResponse.ok(usuariosCursosService.actualizarUsuariosCursos(usuarioCurso));

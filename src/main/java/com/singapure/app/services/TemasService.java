@@ -28,4 +28,9 @@ public class TemasService {
 		return null;
 	}
 
+	public Object crearTemas(Temas tema) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

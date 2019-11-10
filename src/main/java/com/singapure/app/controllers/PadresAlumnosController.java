@@ -22,17 +22,22 @@ public class PadresAlumnosController {
 
 	@GetMapping("/v1/padresAlumnos")
     public ResponseEntity<?> consultarPadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return GenericResponse.ok(padresAlumnosService.consultarpadresAlumnos(padresAlumnos));
+    	return GenericResponse.ok(padresAlumnosService.consultarPadresAlumnos(padresAlumnos));
     }
 	
 	@PostMapping("/v1/padresAlumnosActualiza")
     public ResponseEntity<?> actualizarPadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return GenericResponse.ok(padresAlumnosService.actualizarpadresAlumnos(padresAlumnos));
+    	return GenericResponse.ok(padresAlumnosService.actualizarPadresAlumnos(padresAlumnos));
+    }
+	
+	@PostMapping("/v1/padresAlumnosCrear")
+    public ResponseEntity<?> crearPadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
+    	return GenericResponse.ok(padresAlumnosService.crearPadresAlumnos(padresAlumnos));
     }
 	
 	@PostMapping("/v1/padresAlumnosEliminar")
     public ResponseEntity<?> eliminarpadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return GenericResponse.ok(padresAlumnosService.elimanarpadresAlumnos(padresAlumnos));
+    	return GenericResponse.ok(padresAlumnosService.elimanarPadresAlumnos(padresAlumnos));
     }
 	
 }

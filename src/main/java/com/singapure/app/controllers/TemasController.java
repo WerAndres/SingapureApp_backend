@@ -22,12 +22,17 @@ public class TemasController {
     	return GenericResponse.ok(temasService.consultarTemas(tema));
     }
 	
-	@PostMapping("/v1/actividadesActualiza")
-    public ResponseEntity<?> actualizarTemas(@RequestBody Temas tema) throws Exception {
+	@PostMapping("/v1/temasCrear")
+    public ResponseEntity<?> crearTemas(@RequestBody Temas tema) throws Exception {
+    	return GenericResponse.ok(temasService.crearTemas(tema));
+    }
+	
+	@PostMapping("/v1/temasActualiza")
+    public ResponseEntity<?> ActualizarTemas(@RequestBody Temas tema) throws Exception {
     	return GenericResponse.ok(temasService.actualizarTemas(tema));
     }
 	
-	@PostMapping("/v1/actividadesEliminar")
+	@PostMapping("/v1/temasEliminar")
     public ResponseEntity<?> eliminarTemas(@RequestBody Temas tema) throws Exception {
     	return GenericResponse.ok(temasService.elimanarTemas(tema));
     }

@@ -22,6 +22,11 @@ public class InteraccionesController {
     	return GenericResponse.ok(InteraccionesService.consultarInteracciones(interacciones));
     }
 	
+	@PostMapping("/v1/InteraccionesCrear")
+    public ResponseEntity<?> crearInteracciones(@RequestBody Interacciones interacciones) throws Exception {
+    	return GenericResponse.ok(InteraccionesService.crearInteracciones(interacciones));
+    }
+	
 	@PostMapping("/v1/InteraccionesActualiza")
     public ResponseEntity<?> actualizarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
     	return GenericResponse.ok(InteraccionesService.actualizarInteracciones(interacciones));
