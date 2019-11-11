@@ -16,7 +16,7 @@ public class CodeStatus {
 	public static String  USER_ALREADY_EXISTS_TEXT		= "Usuario ya existe";
 	
 	public static Integer ERROR_SELECT 					= 996;
-	public static String  ERROR_SELECT_TEXT				= "Error al conultar";
+	public static String  ERROR_SELECT_TEXT				= "Error al consultar";
 	
 	public static Integer ERROR_SAVE 					= 995;
 	public static String  ERROR_SAVE_TEXT				= "Error al guardar";

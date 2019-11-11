@@ -1,7 +1,7 @@
 package com.singapure.app.models;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,10 +33,10 @@ public class Materias implements Serializable {
 	private Long idMateria;
 
 	@Column(name="fecha_act")
-	private Timestamp fechaActualizacion;
+	private Date fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Timestamp fechaCreacion;
+	private Date fechaCreacion;
 
 	@Column(name="nombre")
 	private String nombre;
