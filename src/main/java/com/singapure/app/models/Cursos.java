@@ -16,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name="cursos")
+@Table(name="cursos", schema = "prin")
 @JsonInclude(Include.NON_NULL)
 public class Cursos implements Serializable {
 	private static final long serialVersionUID = 1L;
