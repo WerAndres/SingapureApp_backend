@@ -10,13 +10,18 @@ import org.springframework.stereotype.Service;
 import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.CodeStatus;
 import com.singapure.app.models.Materias;
+import com.singapure.app.models.Usuarios;
 import com.singapure.app.repo.MateriasRepository;
+import com.singapure.app.repo.UsuariosRepository;
 
 @Service
 public class MateriasService {
 	
 	@Autowired
 	private MateriasRepository materiasRepository;
+	
+	@Autowired
+	private UsuariosRepository usuariosRepository;
 
 	public ResponseEntity<?> getAll() {
 		List<Materias> resp = materiasRepository.findAll();
@@ -31,21 +36,37 @@ public class MateriasService {
 		return GenericResponse.ok(resp);
 	}
 
-	public ResponseEntity<?> consultarMaterias(Integer id) {
+	public ResponseEntity<?> getAllMateriasCandidates(String email) {
+		Usuarios user = usuariosRepository.findByEmail(email);
+		if(user == null) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
+		}
+		try {
+			List<Materias> usMat = materiasRepository.findByUserIdMatFilter(user.getIdUsuario());
+			return GenericResponse.ok(usMat);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SELECT,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SELECT_TEXT);
+		}
+	}
+	
+	public ResponseEntity<?> getById(Integer id) {
 		return null;
 	}
 
-	public ResponseEntity<?> actualizarMaterias(Materias materias) {
+	public ResponseEntity<?> update(Materias materias) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResponseEntity<?> eliminarMaterias(Materias materias) {
+	public ResponseEntity<?> delete(Materias materias) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResponseEntity<?> crearMaterias(Materias materias) {
+	public ResponseEntity<?> create(Materias materias) {
 		try {
 			Materias mat = materiasRepository.save(materias);
 			if(mat == null){

@@ -29,7 +29,7 @@ public class UsuariosMateriasService {
 	@Autowired
 	private MateriasRepository materiasRepository;
 	
-	public ResponseEntity<?> crearUsuariosMaterias(UsuariosMaterias usuarioMateria) {
+	public ResponseEntity<?> create(UsuariosMaterias usuarioMateria) {
 		Usuarios user = usuariosRepository.findByEmail(usuarioMateria.getEmail());
 		Materias mat = materiasRepository.findByIdMateria(usuarioMateria.getMateria().getIdMateria());
 		if(user == null) {
@@ -63,21 +63,37 @@ public class UsuariosMateriasService {
 		}
 	}
 
-	public ResponseEntity<?> consultarUsuariosMaterias(String email) {
+	public ResponseEntity<?> findByEmail(String email) {
 		Usuarios user = usuariosRepository.findByEmail(email);
 		if(user == null) {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
 					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
 		}
-		return GenericResponse.ok(usuariosMateriasRepository.findByUserId(user.getIdUsuario()));
+		try {
+			List<UsuariosMaterias> usMat = usuariosMateriasRepository.findByUserId(user.getIdUsuario());
+			return GenericResponse.ok(usMat);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+		}
 	}
-
-	public ResponseEntity<?> actualizarUsuariosMaterias(UsuariosMaterias usuarioMateria) {
+	
+	public ResponseEntity<?> getAllMaterias() {
+		List<UsuariosMaterias> userMat = usuariosMateriasRepository.findAll();
+		if(userMat.isEmpty()) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
+		}
+		return GenericResponse.ok(userMat);
+	}
+	
+	public ResponseEntity<?> update(UsuariosMaterias usuarioMateria) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public ResponseEntity<?> elimanarUsuariosMaterias(UsuariosMaterias usuarioMateria) {
+	public ResponseEntity<?> delete(UsuariosMaterias usuarioMateria) {
 		// TODO Auto-generated method stub
 		return null;
 	}
