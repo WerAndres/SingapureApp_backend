@@ -18,4 +18,7 @@ public interface UsuariosMateriasRepository extends JpaRepository<UsuariosMateri
 	@Query("select uc from UsuariosMaterias uc where uc.usuario.idUsuario = :idUsuario and uc.materia.idMateria = :idMateria")
 	List<UsuariosMaterias> findByUserIdMat(@Param("idUsuario") Long idUsuario, @Param("idMateria") Long idMateria);
 
+	@Query("select uc from UsuariosMaterias uc where uc.idUsuarioMateria = :idUsuarioMateria")
+	UsuariosMaterias findByIdUserIdMat(@Param("idUsuarioMateria") Long idUsuarioMateria);
+
 }

@@ -32,7 +32,7 @@ public class UsuariosMaterias implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_usuario_materia")
-	private Integer idUsuarioMateria;
+	private Long idUsuarioMateria;
 	
 	@ManyToOne
 	@JoinColumn(name="id_usuario")
