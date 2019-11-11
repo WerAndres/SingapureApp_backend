@@ -15,8 +15,11 @@ public class CodeStatus {
 	public static Integer USER_ALREADY_EXISTS 		= 997;
 	public static String USER_ALREADY_EXISTS_TEXT	= "Usuario ya existe";
 	
-	public static Integer LIST_COURSE_EMPTY 		= 996;
-	public static String LIST_COURSE_EMPTY_TEXT	= "Lista de cursos vacia";
+	public static Integer LIST_CLASS_EMPTY 		= 996;
+	public static String LIST_CLASS_EMPTY_TEXT	= "Lista de materias vacia";
+	
+	public static Integer LIST_COURSES_EMPTY 		= 995;
+	public static String LIST_COURSES_EMPTY_TEXT	= "Lista de cursos vacia";
 	
 	//CODIGOS EXITOSOS HTTP
 	public static Integer HTTP_OK 					= 200;

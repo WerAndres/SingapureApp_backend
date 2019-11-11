@@ -1,16 +1,22 @@
 package com.singapure.app.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.sql.Timestamp;
+import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.sql.Timestamp;
-import java.util.List;
 
 
 @Getter
@@ -27,16 +33,16 @@ public class Cursos implements Serializable {
 	private Integer idCurso;
 
 	@Column(name="fecha_act")
-	private Timestamp fechaAct;
+	private Timestamp fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Timestamp fechaCrea;
+	private Timestamp fechaCreacion;
 
 	@Column(name="nombre")
 	private String nombre;
 
-	//bi-directional many-to-one association to Tema
+	//bi-directional many-to-one association to materia
 	@OneToMany(mappedBy="curso")
-	private List<Temas> temas;
+	private List<Materias> materias;
 
 }

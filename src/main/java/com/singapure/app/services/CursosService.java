@@ -18,15 +18,15 @@ public class CursosService {
 	@Autowired
 	private CursosRepository cursosRepository;
 
-	public ResponseEntity<?> consultarAllCursos() {
+	public ResponseEntity<?> getAll() {
 		List<Cursos> resp = cursosRepository.findAll();
 		if(resp == null) {
-			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.LIST_COURSE_EMPTY,
-					HttpStatus.NOT_FOUND, CodeStatus.LIST_COURSE_EMPTY_TEXT);
+			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY,
+					HttpStatus.NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY_TEXT);
 		}
 		if(resp.isEmpty()) {
-			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.LIST_COURSE_EMPTY,
-					HttpStatus.NOT_FOUND, CodeStatus.LIST_COURSE_EMPTY_TEXT);
+			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY,
+					HttpStatus.NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY_TEXT);
 		}
 		return GenericResponse.ok(resp);
 	}

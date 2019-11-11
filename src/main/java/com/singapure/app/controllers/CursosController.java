@@ -20,7 +20,7 @@ public class CursosController {
 
 	@GetMapping("/v1/cursos")
     public ResponseEntity<?> consultarAllCursos() throws Exception {
-    	return GenericResponse.ok(cursosService.consultarAllCursos());
+    	return GenericResponse.ok(cursosService.getAll());
     }
 	
 	@GetMapping("/v1/cursos/:idCurso")
