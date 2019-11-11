@@ -20,8 +20,18 @@ import java.sql.Timestamp;
 public class PadresAlumnos implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId
-	private PadresAlumnoPK id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="id_padre_alumno")
+	private Integer idPadreAlumno;
+	
+	@ManyToOne
+	@JoinColumn(name="id_padre")
+	private Usuarios padre;
+	
+	@ManyToOne
+	@JoinColumn(name="id_alumno")
+	private Usuarios alumno;
 	
 	@Column(name="fecha_act")
 	private Timestamp fechaAct;

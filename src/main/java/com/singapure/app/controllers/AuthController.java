@@ -24,7 +24,7 @@ public class AuthController {
     	if(userRes != null) {    		
     		return GenericResponse.ok(userRes);
     	}else {    		
-    		return GenericResponse.generic(CodeStatus.HTTP_UNAUTHORIZED, CodeStatus.USERPASS_INCORRECT, HttpStatus.UNAUTHORIZED, CodeStatus.USERPASS_INCORRECT_TEXT);
+    		return GenericResponse.generic(CodeStatus.HTTP_UNAUTHORIZED, CodeStatus.USERPASS_INCORRECT, HttpStatus.UNAUTHORIZED, HttpStatus.UNAUTHORIZED + "", CodeStatus.USERPASS_INCORRECT_TEXT);
     	}
     }
 	
@@ -38,10 +38,10 @@ public class AuthController {
 	    		userRes.setPassword(null);
 	    		return GenericResponse.ok(userRes);	    		
 	    	}else {
-	    		return GenericResponse.generic(CodeStatus.HTTP_INTERNAL_SERVER_ERROR, CodeStatus.ERROR_GENERIC, HttpStatus.INTERNAL_SERVER_ERROR, CodeStatus.ERROR_GENERIC_TEXT);
+	    		return GenericResponse.generic(CodeStatus.HTTP_INTERNAL_SERVER_ERROR, CodeStatus.ERROR_GENERIC, HttpStatus.INTERNAL_SERVER_ERROR, HttpStatus.INTERNAL_SERVER_ERROR + "", CodeStatus.ERROR_GENERIC_TEXT);
 	    	}
 		}else {
-			return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.USER_ALREADY_EXISTS, HttpStatus.CONFLICT, CodeStatus.USER_ALREADY_EXISTS_TEXT);    		
+			return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.USER_ALREADY_EXISTS, HttpStatus.CONFLICT, HttpStatus.CONFLICT + "", CodeStatus.USER_ALREADY_EXISTS_TEXT);    		
     	}
     }
 }
