@@ -40,7 +40,7 @@ public class UsuariosMateriasController {
     	return usuariosMateriasService.update(usuarioMateria);
     }
 	
-	@PostMapping("/v1/usuarioMateria/delete")
+	@PostMapping("/secured/v1/usuarioMateria/delete")
     public ResponseEntity<?> delete(@RequestBody UsuariosMaterias usuarioMateria) throws Exception {
     	return usuariosMateriasService.delete(usuarioMateria);
     }
