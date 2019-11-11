@@ -52,7 +52,7 @@ public class AuthService {
 			@RequestHeader("clientId") String clientId) {
 		return new AuthenticationToken(Jwts.builder().setSubject(clientTxt).claim("role", "USER")
 				.claim("Id", clientId).setIssuedAt(new Date(System.currentTimeMillis()))
-				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_SECONDS * 1000))
+				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_SECONDS * 1000000))
 				.signWith(SignatureAlgorithm.HS512, SECURITY_KEY).compact());
 	}
 	

@@ -1,11 +1,11 @@
 package com.singapure.app.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.singapure.app.models.Cursos;
 import com.singapure.app.repo.CursosRepository;
-import com.singapure.app.repo.UsuariosRepository;
 
 @Service
 public class CursosService {
@@ -13,8 +13,11 @@ public class CursosService {
 	@Autowired
 	private CursosRepository cursosRepository;
 
-	public static Object consultarCursos(Cursos cursos) {
-		// TODO Auto-generated method stub
+	public ResponseEntity<?> getAll() {
+		return null;
+	}
+
+	public static Object consultarCursos(Integer id) {
 		return null;
 	}
 

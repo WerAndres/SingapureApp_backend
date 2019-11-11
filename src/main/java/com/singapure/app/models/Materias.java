@@ -1,15 +1,15 @@
 package com.singapure.app.models;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
-import java.util.List;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
@@ -22,23 +22,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="cursos", schema = "prin")
+@Table(name="materias", schema = "prin")
 @JsonInclude(Include.NON_NULL)
-public class Cursos implements Serializable {
+public class Materias implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="id_curso")
-	private Integer idCurso;
+	@Column(name="id_materia")
+	private Long idMateria;
 
 	@Column(name="fecha_act")
-	private Timestamp fechaActualizacion;
+	private Date fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Timestamp fechaCreacion;
+	private Date fechaCreacion;
 
 	@Column(name="nombre")
 	private String nombre;
+	
+	//bi-directional many-to-one association to Curso
+	@ManyToOne
+	@JoinColumn(name="id_curso")
+	private Cursos curso;
+
 
 }

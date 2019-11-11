@@ -32,7 +32,7 @@ public class UsuariosService {
 			if (emailExiste != null) {
 				if (emailExiste.getEmail().equals(usuario.getEmail())) {
 					return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.USER_ALREADY_EXISTS,
-							HttpStatus.CONFLICT, CodeStatus.USER_ALREADY_EXISTS_TEXT);
+							HttpStatus.CONFLICT, HttpStatus.CONFLICT + "", CodeStatus.USER_ALREADY_EXISTS_TEXT);
 				}else {
 					usuarioSave.setEmail(usuario.getEmail());
 					return GenericResponse.ok(usuariosRepository.save(usuarioSave));
