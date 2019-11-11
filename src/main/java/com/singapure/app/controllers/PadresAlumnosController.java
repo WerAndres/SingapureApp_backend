@@ -8,9 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.singapure.app.dto.GenericResponse;
-import com.singapure.app.models.Actividades;
 import com.singapure.app.models.PadresAlumnos;
-import com.singapure.app.services.ActividadesService;
 import com.singapure.app.services.PadresAlumnosService;
 
 

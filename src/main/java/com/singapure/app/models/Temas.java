@@ -43,9 +43,9 @@ public class Temas implements Serializable {
 	@OneToMany(mappedBy="tema")
 	private List<Interacciones> interacciones;
 
-	//bi-directional many-to-one association to Curso
+	//bi-directional many-to-one association to Materia
 	@ManyToOne
-	@JoinColumn(name="id_curso")
-	private Cursos curso;
+	@JoinColumn(name="id_materia")
+	private Materias materia;
 
 }
