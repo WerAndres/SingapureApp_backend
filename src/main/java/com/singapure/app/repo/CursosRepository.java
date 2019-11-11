@@ -7,5 +7,5 @@ import com.singapure.app.models.Cursos;
 
 @Repository
 public interface CursosRepository extends JpaRepository<Cursos, String>{
-
+	
 }
