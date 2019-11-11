@@ -1,14 +1,9 @@
 package com.singapure.app.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.singapure.app.dto.GenericResponse;
-import com.singapure.app.models.CodeStatus;
 import com.singapure.app.models.Cursos;
 import com.singapure.app.repo.CursosRepository;
 
@@ -19,16 +14,7 @@ public class CursosService {
 	private CursosRepository cursosRepository;
 
 	public ResponseEntity<?> getAll() {
-		List<Cursos> resp = cursosRepository.findAll();
-		if(resp == null) {
-			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY,
-					HttpStatus.NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY_TEXT);
-		}
-		if(resp.isEmpty()) {
-			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY,
-					HttpStatus.NOT_FOUND, CodeStatus.LIST_COURSES_EMPTY_TEXT);
-		}
-		return GenericResponse.ok(resp);
+		return null;
 	}
 
 	public static Object consultarCursos(Integer id) {

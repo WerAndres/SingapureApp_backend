@@ -41,8 +41,4 @@ public class Cursos implements Serializable {
 	@Column(name="nombre")
 	private String nombre;
 
-	//bi-directional many-to-one association to materia
-	@OneToMany(mappedBy="curso")
-	private List<Materias> materias;
-
 }

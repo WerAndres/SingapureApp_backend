@@ -8,4 +8,5 @@ import com.singapure.app.models.Materias;
 @Repository
 public interface MateriasRepository extends JpaRepository<Materias, String>{
 	
+	Materias findByIdMateria(Long idMateria);
 }
