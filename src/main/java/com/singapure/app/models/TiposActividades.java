@@ -2,6 +2,7 @@ package com.singapure.app.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +21,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="tipos_actividades")
+@Table(name="tipos_actividades" , schema = "prin")
 @JsonInclude(Include.NON_NULL)
 public class TiposActividades implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,10 +32,10 @@ public class TiposActividades implements Serializable {
 	private Integer idTipoAct;
 
 	@Column(name="fecha_act")
-	private Timestamp fechaAct;
+	private Date fechaAct;
 
 	@Column(name="fecha_crea")
-	private Timestamp fechaCrea;
+	private Date fechaCrea;
 
 	@Column(name="nombre")
 	private String nombre;

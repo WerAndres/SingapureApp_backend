@@ -15,26 +15,26 @@ import com.singapure.app.services.InteraccionesService;
 public class InteraccionesController {
 	
 	@Autowired
-	InteraccionesService interaccionesService;
+	private InteraccionesService interaccionesService;
 
-	@GetMapping("/v1/Interacciones")
-    public ResponseEntity<?> consultarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.consultarInteracciones(interacciones));
+	@GetMapping("/v1/interacciones")
+    public ResponseEntity<?> getAllInteracciones() throws Exception {
+    	return GenericResponse.ok(interaccionesService.getAllInteracciones());
     }
 	
-	@PostMapping("/v1/InteraccionesCrear")
-    public ResponseEntity<?> crearInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.crearInteracciones(interacciones));
+	@PostMapping("/v1/interacciones/create")
+    public ResponseEntity<?> create(@RequestBody Interacciones interacciones) throws Exception {
+    	return GenericResponse.ok(interaccionesService.create(interacciones));
     }
 	
-	@PostMapping("/v1/InteraccionesActualiza")
+	@PostMapping("/v1/interacciones/update")
     public ResponseEntity<?> actualizarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.actualizarInteracciones(interacciones));
+    	return GenericResponse.ok(interaccionesService.update(interacciones));
     }
 	
-	@PostMapping("/v1/InteraccionesEliminar")
-    public ResponseEntity<?> eliminarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.eliminarInteracciones(interacciones));
+	@PostMapping("/v1/interacciones/delete")
+    public ResponseEntity<?> delete(@RequestBody Interacciones interacciones) throws Exception {
+    	return GenericResponse.ok(interaccionesService.delete(interacciones));
     }
 
 }
