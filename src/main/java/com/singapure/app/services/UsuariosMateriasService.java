@@ -53,18 +53,18 @@ public class UsuariosMateriasService {
 			List<UsuariosMaterias> usC = usuariosMateriasRepository.findByUserIdMat(user.getIdUsuario(), mat.getIdMateria());
 			if(!usC.isEmpty()) {
 				return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.RELATION_ALREADY_EXIST,
-						HttpStatus.CONFLICT, HttpStatus.CONFLICT + "", CodeStatus.RELATION_ALREADY_EXIST_TEXT);
+						HttpStatus.CONFLICT, CodeStatus.RELATION_ALREADY_EXIST_TEXT, HttpStatus.CONFLICT + "");
 			}
 			UsuariosMaterias usCRet = usuariosMateriasRepository.save(usuMat);
 			if(usCRet == null){
 				return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-						HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+						HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
 			}
 			return GenericResponse.ok(usCRet);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 	}
 
@@ -72,7 +72,7 @@ public class UsuariosMateriasService {
 		Usuarios user = usuariosRepository.findByEmail(email);
 		if(user == null) {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.USER_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 		try {
 			List<UsuariosMaterias> usMat = usuariosMateriasRepository.findByUserId(user.getIdUsuario());
@@ -80,7 +80,7 @@ public class UsuariosMateriasService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 	}
 	
@@ -88,7 +88,7 @@ public class UsuariosMateriasService {
 		List<UsuariosMaterias> userMat = usuariosMateriasRepository.findAll();
 		if(userMat.isEmpty()) {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.USER_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 		return GenericResponse.ok(userMat);
 	}
@@ -103,14 +103,14 @@ public class UsuariosMateriasService {
 			UsuariosMaterias usC = usuariosMateriasRepository.findByIdUserIdMat(usuarioMateria.getIdUsuarioMateria());
 			if(usC == null) {
 				return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.ERROR_DELETE,
-						HttpStatus.CONFLICT, HttpStatus.CONFLICT + "", CodeStatus.ERROR_DELETE_TEXT);
+						HttpStatus.CONFLICT, CodeStatus.ERROR_DELETE_TEXT, HttpStatus.CONFLICT + "");
 			}
 			usuariosMateriasRepository.delete(usC);
 			return GenericResponse.ok(null);
 		}catch (Exception e) {
 			e.printStackTrace();
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 	}
 
