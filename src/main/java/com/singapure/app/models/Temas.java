@@ -10,13 +10,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 
 @Getter
 @Setter
 @Entity
-@Table(name="temas")
+@Table(name="temas", schema = "prin")
 @JsonInclude(Include.NON_NULL)
 public class Temas implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -27,10 +28,10 @@ public class Temas implements Serializable {
 	private Integer idTema;
 
 	@Column(name="fecha_act")
-	private Timestamp fechaAct;
+	private Date fechaAct;
 
 	@Column(name="fecha_crea")
-	private Timestamp fechaCrea;
+	private Date fechaCrea;
 
 	@Column(name="nombre")
 	private String nombre;
@@ -43,9 +44,9 @@ public class Temas implements Serializable {
 	@OneToMany(mappedBy="tema")
 	private List<Interacciones> interacciones;
 
-	//bi-directional many-to-one association to Materia
-	@ManyToOne
-	@JoinColumn(name="id_materia")
-	private Materias materia;
+//	//bi-directional many-to-one association to Materia
+//	@ManyToOne
+//	@JoinColumn(name="id_materia")
+//	private Materias materia;
 
 }

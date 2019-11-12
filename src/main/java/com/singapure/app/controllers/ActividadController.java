@@ -18,23 +18,23 @@ public class ActividadController {
 	ActividadesService actividadesService;
 
 	@GetMapping("/v1/actividades")
-    public ResponseEntity<?> consultarActividades(@RequestBody Actividades actividad) throws Exception {
-    	return GenericResponse.ok(actividadesService.consultarActividades(actividad));
+    public ResponseEntity<?> getAll() throws Exception {
+    	return actividadesService.getAllActividades();
     }
 	
-	@PostMapping("/v1/actividadesCrear")
+	@PostMapping("/v1/actividades/create")
     public ResponseEntity<?> crearActividades(@RequestBody Actividades actividad) throws Exception {
-    	return GenericResponse.ok(actividadesService.crearActividades(actividad));
+    	return actividadesService.create(actividad);
     }
 	
-	@PostMapping("/v1/actividadesActualiza")
+	@PostMapping("/v1/actividades/update")
     public ResponseEntity<?> actualizarActividades(@RequestBody Actividades actividad) throws Exception {
-    	return GenericResponse.ok(actividadesService.actualizarActividades(actividad));
+    	return actividadesService.update(actividad);
     }
 	
-	@PostMapping("/v1/actividadesEliminar")
+	@PostMapping("/v1/actividades/delete")
     public ResponseEntity<?> eliminarActividades(@RequestBody Actividades actividad) throws Exception {
-    	return GenericResponse.ok(actividadesService.elimanarActividades(actividad));
+    	return actividadesService.delete(actividad);
     }
 
 }
