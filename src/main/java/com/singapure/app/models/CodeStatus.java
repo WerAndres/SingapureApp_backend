@@ -27,6 +27,12 @@ public class CodeStatus {
 	public static Integer RELATION_ALREADY_EXIST		= 993;
 	public static String  RELATION_ALREADY_EXIST_TEXT	= "Relación ya existe";
 	
+	public static Integer CLASS_NOT_EXISTS 				= 992;
+	public static String  CLASS_NOT_EXISTS_TEXT			= "Materia no existe";
+	
+	public static Integer ERROR_DELETE					= 991;
+	public static String  ERROR_DELETE_TEXT				= "Error al borrar";
+	
 	//CODIGOS EXITOSOS HTTP
 	public static Integer HTTP_OK 						= 200;
 	public static Integer HTTP_CREATED					= 202;

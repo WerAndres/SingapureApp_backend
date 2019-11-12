@@ -36,13 +36,18 @@ public class UsuariosMateriasService {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
 					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
 		}
-		usuarioMateria.setUsuario(user);
-		usuarioMateria.setMateria(mat);
-		if(usuarioMateria.getFechaActualizacion() == null) {
-			usuarioMateria.setFechaActualizacion(new Date());
+		if(mat == null) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.CLASS_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.CLASS_NOT_EXISTS_TEXT);
 		}
-		if(usuarioMateria.getFechaCreacion() == null) {
-			usuarioMateria.setFechaCreacion(new Date());
+		UsuariosMaterias usuMat = new UsuariosMaterias();
+		usuMat.setUsuario(user);
+		usuMat.setMateria(mat);
+		if(usuMat.getFechaActualizacion() == null) {
+			usuMat.setFechaActualizacion(new Date());
+		}
+		if(usuMat.getFechaCreacion() == null) {
+			usuMat.setFechaCreacion(new Date());
 		}
 		try {
 			List<UsuariosMaterias> usC = usuariosMateriasRepository.findByUserIdMat(user.getIdUsuario(), mat.getIdMateria());
@@ -50,7 +55,7 @@ public class UsuariosMateriasService {
 				return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.RELATION_ALREADY_EXIST,
 						HttpStatus.CONFLICT, HttpStatus.CONFLICT + "", CodeStatus.RELATION_ALREADY_EXIST_TEXT);
 			}
-			UsuariosMaterias usCRet = usuariosMateriasRepository.save(usuarioMateria);
+			UsuariosMaterias usCRet = usuariosMateriasRepository.save(usuMat);
 			if(usCRet == null){
 				return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
 						HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
@@ -94,8 +99,19 @@ public class UsuariosMateriasService {
 	}
 
 	public ResponseEntity<?> delete(UsuariosMaterias usuarioMateria) {
-		// TODO Auto-generated method stub
-		return null;
+		try {
+			UsuariosMaterias usC = usuariosMateriasRepository.findByIdUserIdMat(usuarioMateria.getIdUsuarioMateria());
+			if(usC == null) {
+				return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.ERROR_DELETE,
+						HttpStatus.CONFLICT, HttpStatus.CONFLICT + "", CodeStatus.ERROR_DELETE_TEXT);
+			}
+			usuariosMateriasRepository.delete(usC);
+			return GenericResponse.ok(null);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+		}
 	}
 
 }
