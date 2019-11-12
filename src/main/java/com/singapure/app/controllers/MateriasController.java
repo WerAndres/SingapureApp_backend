@@ -20,7 +20,7 @@ public class MateriasController {
 	@Autowired
 	MateriasService materiasService;
 
-	@GetMapping("/secured/v1/materias")
+	@GetMapping("/v1/materias")
     public ResponseEntity<?> getAll() throws Exception {
     	return materiasService.getAll();
     }

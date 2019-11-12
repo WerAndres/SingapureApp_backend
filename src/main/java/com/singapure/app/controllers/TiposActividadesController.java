@@ -18,23 +18,23 @@ public class TiposActividadesController {
 	TiposActividadesService tiposActividadesService;
 
 	@GetMapping("/v1/tipoActividades")
-    public ResponseEntity<?> consultarActividades(@RequestBody TiposActividades tipoActividad) throws Exception {
-    	return GenericResponse.ok(tiposActividadesService.consultarTiposActividades(tipoActividad));
+    public ResponseEntity<?> consultarActividades() throws Exception {
+    	return GenericResponse.ok(tiposActividadesService.getAllTiposActividades());
     }
 	
-	@PostMapping("/v1/tipoActividadesCrear")
+	@PostMapping("/v1/tipoActividades/create")
     public ResponseEntity<?> crearActividades(@RequestBody TiposActividades tipoActividad) throws Exception {
-    	return GenericResponse.ok(tiposActividadesService.crearTiposActividades(tipoActividad));
+    	return GenericResponse.ok(tiposActividadesService.create(tipoActividad));
     }
 	
-	@PostMapping("/v1/tipoActividadesActualiza")
+	@PostMapping("/v1/tipoActividades/update")
     public ResponseEntity<?> actualizarActividades(@RequestBody TiposActividades tipoActividad) throws Exception {
-    	return GenericResponse.ok(tiposActividadesService.actualizarTiposActividades(tipoActividad));
+    	return GenericResponse.ok(tiposActividadesService.update(tipoActividad));
     }
 	
-	@PostMapping("/v1/tipoActividadesEliminar")
+	@PostMapping("/v1/tipoActividades/delete")
     public ResponseEntity<?> eliminarActividades(@RequestBody TiposActividades tipoActividad) throws Exception {
-    	return GenericResponse.ok(tiposActividadesService.elimanarTiposActividades(tipoActividad));
+    	return GenericResponse.ok(tiposActividadesService.delete(tipoActividad));
     }
 
 }

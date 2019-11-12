@@ -2,6 +2,7 @@ package com.singapure.app.models;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -33,10 +34,10 @@ public class Cursos implements Serializable {
 	private Integer idCurso;
 
 	@Column(name="fecha_act")
-	private Timestamp fechaActualizacion;
+	private Date fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Timestamp fechaCreacion;
+	private Date fechaCreacion;
 
 	@Column(name="nombre")
 	private String nombre;

@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name="actividades")
+@Table(name="actividades", schema = "prin")
 @JsonInclude(Include.NON_NULL)
 public class Actividades implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -47,8 +47,8 @@ public class Actividades implements Serializable {
 	private Temas tema;
 
 	//bi-directional many-to-one association to TiposActividade
-//	@ManyToOne
-//	@JoinColumn(name="tipo_acti")
-//	private TiposActividades tiposActividades;
+	@ManyToOne
+	@JoinColumn(name="tipo_acti")
+	private TiposActividades tiposActividades;
 
 }
