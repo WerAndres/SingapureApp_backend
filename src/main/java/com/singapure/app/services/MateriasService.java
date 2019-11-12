@@ -27,11 +27,11 @@ public class MateriasService {
 		List<Materias> resp = materiasRepository.findAll();
 		if(resp == null) {
 			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.ERROR_SELECT,
-					HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND + "", CodeStatus.ERROR_SELECT_TEXT);
+					HttpStatus.NOT_FOUND, CodeStatus.ERROR_SELECT_TEXT, HttpStatus.NOT_FOUND + "");
 		}
 		if(resp.isEmpty()) {
 			return GenericResponse.generic(CodeStatus.HTTP_NOT_FOUND, CodeStatus.ERROR_SELECT,
-					HttpStatus.NOT_FOUND, HttpStatus.NOT_FOUND + "", CodeStatus.ERROR_SELECT_TEXT);
+					HttpStatus.NOT_FOUND, CodeStatus.ERROR_SELECT_TEXT, HttpStatus.NOT_FOUND + "");
 		}
 		return GenericResponse.ok(resp);
 	}
@@ -40,7 +40,7 @@ public class MateriasService {
 		Usuarios user = usuariosRepository.findByEmail(email);
 		if(user == null) {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.USER_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 		try {
 			List<Materias> usMat = materiasRepository.findByUserIdMatFilter(user.getIdUsuario());
@@ -48,7 +48,7 @@ public class MateriasService {
 		} catch (Exception e) {
 			e.printStackTrace();
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SELECT,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SELECT_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SELECT_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 	}
 	
@@ -71,12 +71,12 @@ public class MateriasService {
 			Materias mat = materiasRepository.save(materias);
 			if(mat == null){
 				return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-						HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+						HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
 			}
 			return GenericResponse.ok(mat);
 		}catch (Exception e) {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
 		}	
 	}
 
