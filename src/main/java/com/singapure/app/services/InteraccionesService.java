@@ -9,17 +9,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.singapure.app.dto.GenericResponse;
-import com.singapure.app.models.Actividades;
 import com.singapure.app.models.CodeStatus;
 import com.singapure.app.models.Interacciones;
-import com.singapure.app.models.Temas;
-import com.singapure.app.models.TiposActividades;
-import com.singapure.app.repo.CursosRepository;
+import com.singapure.app.models.Materias;
+import com.singapure.app.models.Usuarios;
 import com.singapure.app.repo.InteraccionesRepository;
+import com.singapure.app.repo.UsuariosRepository;
 
 @Service
 public class InteraccionesService {
 
+	@Autowired
+	private UsuariosRepository usuariosRepository;
+	
 	@Autowired
 	private InteraccionesRepository interaccionesRepository;
 	
@@ -31,6 +33,33 @@ public class InteraccionesService {
 					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
 		}
 		return GenericResponse.ok(interacciones);
+	}
+	
+	public ResponseEntity<?> getAllfilterEmail(String email) {
+		Usuarios user = usuariosRepository.findByEmail(email);
+		if(user == null) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, CodeStatus.USER_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
+		}
+		try {
+			List<Interacciones> inter = interaccionesRepository.findByidUser(user.getIdUsuario());
+			return GenericResponse.ok(inter);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SELECT,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SELECT_TEXT, HttpStatus.BAD_REQUEST + "");
+		}
+	}
+	
+	public ResponseEntity<?> getAllfilterTema(String idTema) {
+		try {
+			List<Interacciones> inter = interaccionesRepository.findByidTema(Long.parseLong(idTema));
+			return GenericResponse.ok(inter);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SELECT,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SELECT_TEXT, HttpStatus.BAD_REQUEST + "");
+		}
 	}
 
 	public ResponseEntity<?> update(Interacciones interacciones) {
@@ -44,12 +73,17 @@ public class InteraccionesService {
 	}
 
 	public ResponseEntity<?> create(Interacciones interacciones) {
-		
-		if(interacciones.getFechaAct()== null) {
-			interacciones.setFechaAct(new Date());
+		Usuarios user = usuariosRepository.findByEmail(interacciones.getEmail());
+		if(user == null) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
 		}
-		if(interacciones.getFechaCrea() == null) {
-			interacciones.setFechaCrea(new Date());
+		interacciones.setUsuario(user);
+		if(interacciones.getFechaActualizacion()== null) {
+			interacciones.setFechaActualizacion(new Date());
+		}
+		if(interacciones.getFechaCreacion() == null) {
+			interacciones.setFechaCreacion(new Date());
 		}
 		
 		try {

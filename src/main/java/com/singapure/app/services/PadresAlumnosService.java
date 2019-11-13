@@ -24,23 +24,7 @@ public class PadresAlumnosService {
 	@Autowired
 	private UsuariosRepository usuariosRepository;
 	
-	public ResponseEntity<?> findByEmailPadre(PadresAlumnos padresAlumnos) {
-		Usuarios user = usuariosRepository.findByEmail(padresAlumnos.getPadre().getEmail());
-		if(user == null) {
-			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
-		}
-		try {
-			List<PadresAlumnos> padAlum = padresAlumnosRepository.findByIdPadre(user.getIdUsuario());
-			return GenericResponse.ok(padAlum);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
-		}
-	}
-
-	public ResponseEntity<?> findByEmailAlumno(String email) {
+	public ResponseEntity<?> findByEmailPadre(String email) {
 		Usuarios user = usuariosRepository.findByEmail(email);
 		if(user == null) {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
@@ -56,9 +40,36 @@ public class PadresAlumnosService {
 		}
 	}
 
-	public ResponseEntity<?> delete(PadresAlumnos padresAlumnos) {
-		// TODO Auto-generated method stub
-		return null;
+	public ResponseEntity<?> findByEmailAlumno(String email) {
+		Usuarios user = usuariosRepository.findByEmail(email);
+		if(user == null) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.USER_NOT_EXISTS_TEXT);
+		}
+		try {
+			List<PadresAlumnos> padAlum = padresAlumnosRepository.findByIdPadre(user.getIdUsuario());
+			return GenericResponse.ok(padAlum);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
+					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+		}
+	}
+
+	public ResponseEntity<?> delete(PadresAlumnos padreAlumno) {
+		try {
+			PadresAlumnos padA = padresAlumnosRepository.findByIdPadreAlumno(padreAlumno.getIdPadreAlumno());
+			if(padA == null) {
+				return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.ERROR_DELETE,
+						HttpStatus.CONFLICT, CodeStatus.ERROR_DELETE_TEXT, HttpStatus.CONFLICT + "");
+			}
+			padresAlumnosRepository.delete(padA);
+			return GenericResponse.ok(null);
+		}catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
+		}
 	}
 	
 	public ResponseEntity<?> update(PadresAlumnos padresAlumnos) {
@@ -83,7 +94,7 @@ public class PadresAlumnosService {
 			padAlum.setFechaCreacion(new Date());
 		}
 		try {
-			List<PadresAlumnos> pad = padresAlumnosRepository.findByIdPadreAlumno(userPadre.getIdUsuario(), userAlumno.getIdUsuario());
+			List<PadresAlumnos> pad = padresAlumnosRepository.findByIdPadreIdAlumno(userPadre.getIdUsuario(), userAlumno.getIdUsuario());
 			if(!pad.isEmpty()) {
 				return GenericResponse.generic(CodeStatus.HTTP_CONFLICT, CodeStatus.RELATION_ALREADY_EXIST,
 						HttpStatus.CONFLICT, CodeStatus.RELATION_ALREADY_EXIST_TEXT, HttpStatus.CONFLICT + "");

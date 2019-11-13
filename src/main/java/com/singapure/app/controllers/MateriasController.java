@@ -25,10 +25,10 @@ public class MateriasController {
     	return materiasService.getAll();
     }
 	
-	@RequestMapping(value = "/secured/v1/materias/cantidatosAgregar", method = RequestMethod.GET)
+	@RequestMapping(value = "/secured/v1/materias/filter", method = RequestMethod.GET)
 	@ResponseBody
     public ResponseEntity<?> getAllFilter(@RequestParam String email) throws Exception {
-    	return materiasService.getAllMateriasCandidates(email);
+    	return materiasService.getAllbyEmail(email);
     }
 	
 	@GetMapping("/v1/materias/:idCurso")

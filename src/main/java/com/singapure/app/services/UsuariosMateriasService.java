@@ -1,5 +1,6 @@
 package com.singapure.app.services;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -11,9 +12,11 @@ import org.springframework.stereotype.Service;
 import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.CodeStatus;
 import com.singapure.app.models.Materias;
+import com.singapure.app.models.PadresAlumnos;
 import com.singapure.app.models.Usuarios;
 import com.singapure.app.models.UsuariosMaterias;
 import com.singapure.app.repo.MateriasRepository;
+import com.singapure.app.repo.PadresAlumnosRepository;
 import com.singapure.app.repo.UsuariosMateriasRepository;
 import com.singapure.app.repo.UsuariosRepository;
 
@@ -22,6 +25,9 @@ public class UsuariosMateriasService {
 	
 	@Autowired
 	private UsuariosMateriasRepository usuariosMateriasRepository;
+	
+	@Autowired
+	private PadresAlumnosRepository padresAlumnosRepository;
 	
 	@Autowired
 	private UsuariosRepository usuariosRepository;
@@ -79,8 +85,32 @@ public class UsuariosMateriasService {
 			return GenericResponse.ok(usMat);
 		} catch (Exception e) {
 			e.printStackTrace();
-			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_GENERIC,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_GENERIC_TEXT, HttpStatus.BAD_REQUEST + "");
+		}
+	}
+	public ResponseEntity<?> findByEmailPadre(String email) {
+		Usuarios user = usuariosRepository.findByEmail(email);
+		if(user == null) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, CodeStatus.USER_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
+		}
+		List<PadresAlumnos> listAlum = padresAlumnosRepository.findByIdAlumno(user.getIdUsuario());
+		if(listAlum.isEmpty()) {
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,
+					HttpStatus.BAD_REQUEST, CodeStatus.USER_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
+		}
+		List<Long> listIds = new ArrayList<>();
+		for (PadresAlumnos item : listAlum) {
+			listIds.add(item.getAlumno().getIdUsuario());
+		}
+		try {
+			List<UsuariosMaterias> usMat = usuariosMateriasRepository.findByManyUserId(listIds);
+			return GenericResponse.ok(usMat);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_GENERIC,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_GENERIC_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 	}
 	
@@ -109,8 +139,8 @@ public class UsuariosMateriasService {
 			return GenericResponse.ok(null);
 		}catch (Exception e) {
 			e.printStackTrace();
-			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_SAVE_TEXT, HttpStatus.BAD_REQUEST + "");
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_GENERIC,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_GENERIC_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
 	}
 

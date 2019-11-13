@@ -1,17 +1,22 @@
 package com.singapure.app.models;
 
 import java.io.Serializable;
-import javax.persistence.*;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
 
 @Getter
@@ -25,7 +30,7 @@ public class Temas implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_tema")
-	private Integer idTema;
+	private Long idTema;
 
 	@Column(name="fecha_act")
 	private Date fechaAct;
@@ -36,17 +41,9 @@ public class Temas implements Serializable {
 	@Column(name="nombre")
 	private String nombre;
 
-	//bi-directional many-to-one association to Actividade
-	@OneToMany(mappedBy="tema")
-	private List<Actividades> actividades;
-
-	//bi-directional many-to-one association to Interaccione
-	@OneToMany(mappedBy="tema")
-	private List<Interacciones> interacciones;
-
-//	//bi-directional many-to-one association to Materia
-//	@ManyToOne
-//	@JoinColumn(name="id_materia")
-//	private Materias materia;
-
+	//bi-directional many-to-one association to Materia
+	@ManyToOne
+	@JoinColumn(name="id_materia")
+	private Materias materia;
+	
 }

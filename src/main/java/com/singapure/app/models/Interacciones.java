@@ -1,7 +1,6 @@
 package com.singapure.app.models;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -31,20 +31,27 @@ public class Interacciones implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_int")
-	private Integer idInt;
+	private Long idInteraccion;
 
 	@Column(name="fecha_act")
-	private Date fechaAct;
+	private Date fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Date fechaCrea;
+	private Date fechaCreacion;
 
-	@Column(name="nombre")
-	private String nombre;
+	@Column(name="mensaje")
+	private String mensaje;
+	
+	@ManyToOne
+	@JoinColumn(name="id_usuario")
+	private Usuarios usuario;
 
 	//bi-directional many-to-one association to Tema
 	@ManyToOne
 	@JoinColumn(name="id_tema")
 	private Temas tema;
+	
+	@Transient
+	private String email;
 
 }

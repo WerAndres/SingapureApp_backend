@@ -5,9 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.Interacciones;
 import com.singapure.app.services.InteraccionesService;
 
@@ -19,22 +22,35 @@ public class InteraccionesController {
 
 	@GetMapping("/v1/interacciones")
     public ResponseEntity<?> getAllInteracciones() throws Exception {
-    	return GenericResponse.ok(interaccionesService.getAllInteracciones());
+    	return interaccionesService.getAllInteracciones();
     }
 	
-	@PostMapping("/v1/interacciones/create")
+	
+	@RequestMapping(value = "/secured/v1/interacciones/filterEmail", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<?> getAllFilterEmail(@RequestParam String email) throws Exception {
+    	return interaccionesService.getAllfilterEmail(email);
+    }
+	
+	@RequestMapping(value = "/secured/v1/interacciones/filterTema", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<?> getAllFilterTema(@RequestParam String idTema) throws Exception {
+    	return interaccionesService.getAllfilterTema(idTema);
+    }
+	
+	@PostMapping("/secured/v1/interacciones/create")
     public ResponseEntity<?> create(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(interaccionesService.create(interacciones));
+    	return interaccionesService.create(interacciones);
     }
 	
 	@PostMapping("/v1/interacciones/update")
     public ResponseEntity<?> actualizarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(interaccionesService.update(interacciones));
+    	return interaccionesService.update(interacciones);
     }
 	
 	@PostMapping("/v1/interacciones/delete")
     public ResponseEntity<?> delete(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(interaccionesService.delete(interacciones));
+    	return interaccionesService.delete(interacciones);
     }
 
 }

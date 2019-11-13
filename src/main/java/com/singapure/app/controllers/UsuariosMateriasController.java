@@ -19,10 +19,17 @@ public class UsuariosMateriasController {
 	
 	@Autowired
 	UsuariosMateriasService usuariosMateriasService;
+	
 	@RequestMapping(value = "/secured/v1/usuarioMateria/filter", method = RequestMethod.GET)
 	@ResponseBody
     public ResponseEntity<?> getByUser(@RequestParam String email) throws Exception {
     	return usuariosMateriasService.findByEmail(email);
+    }
+	
+	@RequestMapping(value = "/secured/v1/usuarioMateria/filterPadre", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<?> getByUserPadre(@RequestParam String email) throws Exception {
+    	return usuariosMateriasService.findByEmailPadre(email);
     }
 	
 	@GetMapping("/secured/v1/usuarioMateria")
