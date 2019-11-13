@@ -9,12 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.singapure.app.dto.GenericResponse;
-import com.singapure.app.models.Actividades;
 import com.singapure.app.models.CodeStatus;
-import com.singapure.app.models.Temas;
 import com.singapure.app.models.TiposActividades;
 import com.singapure.app.repo.TiposActividadesRepository;
-import com.singapure.app.repo.UsuariosRepository;
 
 @Service
 public class TiposActividadesService {

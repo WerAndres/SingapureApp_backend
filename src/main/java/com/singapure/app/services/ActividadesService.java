@@ -13,7 +13,6 @@ import com.singapure.app.models.Actividades;
 import com.singapure.app.models.CodeStatus;
 import com.singapure.app.models.Temas;
 import com.singapure.app.models.TiposActividades;
-import com.singapure.app.models.UsuariosMaterias;
 import com.singapure.app.repo.ActividadesRepository;
 import com.singapure.app.repo.TemasRepository;
 import com.singapure.app.repo.TiposActividadesRepository;

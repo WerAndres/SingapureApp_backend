@@ -36,7 +36,7 @@ public class MateriasService {
 		return GenericResponse.ok(resp);
 	}
 
-	public ResponseEntity<?> getAllMateriasCandidates(String email) {
+	public ResponseEntity<?> getAllbyEmail(String email) {
 		Usuarios user = usuariosRepository.findByEmail(email);
 		if(user == null) {
 			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.USER_NOT_EXISTS,

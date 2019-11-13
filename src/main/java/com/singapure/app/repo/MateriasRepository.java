@@ -16,4 +16,7 @@ public interface MateriasRepository extends JpaRepository<Materias, String>{
 	List<Materias> findByUserIdMatFilter(@Param("idUsuario") Long idUsuario);
 	
 	Materias findByIdMateria(Long idMateria);
+	
+	@Query("select ma from Materias ma where ma.idMateria IN (:listIdMateria)")
+	List<Materias> findByManyMatId(@Param("listIdMateria") List<Long> listIdMateria);
 }

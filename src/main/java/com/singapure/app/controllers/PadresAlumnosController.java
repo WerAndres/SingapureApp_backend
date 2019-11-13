@@ -23,11 +23,11 @@ public class PadresAlumnosController {
     	return padresAlumnosService.findByEmailAlumno(email);
     }
 	@GetMapping("/secured/v1/padresAlumnos/padre")
-    public ResponseEntity<?> findByEmailPadre(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return padresAlumnosService.findByEmailPadre(padresAlumnos);
+    public ResponseEntity<?> findByEmailPadre(@RequestParam String email) throws Exception {
+    	return padresAlumnosService.findByEmailPadre(email);
     }
 	
-	@PostMapping("/secured/v1/padresAlumnosActualiza")
+	@PostMapping("/secured/v1/padresAlumnos/update")
     public ResponseEntity<?> update(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
     	return padresAlumnosService.update(padresAlumnos);
     }
@@ -37,7 +37,7 @@ public class PadresAlumnosController {
     	return padresAlumnosService.create(padresAlumnos);
     }
 	
-	@PostMapping("/secured/v1/padresAlumnosEliminar")
+	@PostMapping("/secured/v1/padresAlumnos/delete")
     public ResponseEntity<?> delete(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
     	return padresAlumnosService.delete(padresAlumnos);
     }
