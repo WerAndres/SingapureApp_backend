@@ -32,15 +32,15 @@ public class GenericResponse<T> {
 	
 	@SuppressWarnings("rawtypes")
 	public static ResponseEntity ok(Object bussinesData) {
-		return new ResponseEntity<>(new GenericResponse<>(CodeStatus.HTTP_OK, CodeStatus.OK, HttpStatus.OK, CodeStatus.OK_TEXT, HttpStatus.OK.toString(), bussinesData), HttpStatus.OK);
+		return new ResponseEntity<>(new GenericResponse<>(CodeStatus.HTTP_OK, CodeStatus.OK, HttpStatus.OK, CodeStatus.OK_TEXT, null, bussinesData), HttpStatus.OK);
 	}
 	@SuppressWarnings("rawtypes")
-	public static ResponseEntity generic(Integer codeStatus, Integer internalCodeStatus, HttpStatus httpStatus, String message) {
-		return new ResponseEntity<>(new GenericResponse<>(codeStatus, internalCodeStatus, httpStatus, message, httpStatus.toString(), null), httpStatus);
+	public static ResponseEntity generic(Integer codeStatus, Integer internalCodeStatus, HttpStatus httpStatus, String message, String error) {
+		return new ResponseEntity<>(new GenericResponse<>(codeStatus, internalCodeStatus, httpStatus, message, error, null), httpStatus);
 	}
 	@SuppressWarnings("rawtypes")
-	public static ResponseEntity generic(Integer codeStatus, Integer internalCodeStatus, HttpStatus httpStatus, String message, Object bussinesData) {
-		return new ResponseEntity<>(new GenericResponse<>(codeStatus, internalCodeStatus, httpStatus, message, httpStatus.toString(), bussinesData), httpStatus);
+	public static ResponseEntity generic(Integer codeStatus, Integer internalCodeStatus, HttpStatus httpStatus, String message, String error, Object bussinesData) {
+		return new ResponseEntity<>(new GenericResponse<>(codeStatus, internalCodeStatus, httpStatus, message, error, bussinesData), httpStatus);
 	}
 	
 }

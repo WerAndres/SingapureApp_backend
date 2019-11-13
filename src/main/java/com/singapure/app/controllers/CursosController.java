@@ -7,34 +7,37 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.Cursos;
 import com.singapure.app.services.CursosService;
+import com.singapure.app.services.UsuariosMateriasService;
 
 @RestController
 public class CursosController {
 	
 	@Autowired
-	CursosService cursosService;
+	private CursosService cursosService;
+	
+	@Autowired
+	UsuariosMateriasService usuariosMateriasService;
 
 	@GetMapping("/v1/cursos")
-    public ResponseEntity<?> consultarCursos(@RequestBody Cursos cursos) throws Exception {
-    	return GenericResponse.ok(CursosService.consultarCursos(cursos));
+    public ResponseEntity<?> getAllCursos() throws Exception {
+    	return cursosService.getAllCursos();
+    }
+		
+	@PostMapping("/v1/cursos/create")
+    public ResponseEntity<?> create(@RequestBody Cursos cursos) throws Exception {
+    	return cursosService.create(cursos);
     }
 	
-	@PostMapping("/v1/cursosCrear")
-    public ResponseEntity<?> crearCursos(@RequestBody Cursos cursos) throws Exception {
-    	return GenericResponse.ok(CursosService.crearCursos(cursos));
+	@PostMapping("/v1/cursos/update")
+    public ResponseEntity<?> update(@RequestBody Cursos cursos) throws Exception {
+    	return cursosService.update(cursos);
     }
 	
-	@PostMapping("/v1/cursosActualiza")
-    public ResponseEntity<?> actualizarCursos(@RequestBody Cursos cursos) throws Exception {
-    	return GenericResponse.ok(CursosService.actualizarCursos(cursos));
-    }
-	
-	@PostMapping("/v1/cursosEliminar")
-    public ResponseEntity<?> eliminarCursos(@RequestBody Cursos cursos) throws Exception {
-    	return GenericResponse.ok(CursosService.elimanarCursos(cursos));
+	@PostMapping("/v1/cursos/delete")
+    public ResponseEntity<?> delete(@RequestBody Cursos cursos) throws Exception {
+    	return cursosService.delete(cursos);
     }
 
 }

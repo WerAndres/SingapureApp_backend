@@ -5,12 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.singapure.app.dto.GenericResponse;
-import com.singapure.app.models.Actividades;
 import com.singapure.app.models.PadresAlumnos;
-import com.singapure.app.services.ActividadesService;
 import com.singapure.app.services.PadresAlumnosService;
 
 
@@ -20,24 +18,28 @@ public class PadresAlumnosController {
 	@Autowired
 	PadresAlumnosService padresAlumnosService;
 
-	@GetMapping("/v1/padresAlumnos")
-    public ResponseEntity<?> consultarPadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return GenericResponse.ok(padresAlumnosService.consultarPadresAlumnos(padresAlumnos));
+	@GetMapping("/secured/v1/padresAlumnos/alumno")
+    public ResponseEntity<?> findByEmailAlumno(@RequestParam String email) throws Exception {
+    	return padresAlumnosService.findByEmailAlumno(email);
+    }
+	@GetMapping("/secured/v1/padresAlumnos/padre")
+    public ResponseEntity<?> findByEmailPadre(@RequestParam String email) throws Exception {
+    	return padresAlumnosService.findByEmailPadre(email);
     }
 	
-	@PostMapping("/v1/padresAlumnosActualiza")
-    public ResponseEntity<?> actualizarPadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return GenericResponse.ok(padresAlumnosService.actualizarPadresAlumnos(padresAlumnos));
+	@PostMapping("/secured/v1/padresAlumnos/update")
+    public ResponseEntity<?> update(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
+    	return padresAlumnosService.update(padresAlumnos);
     }
 	
-	@PostMapping("/v1/padresAlumnosCrear")
-    public ResponseEntity<?> crearPadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return GenericResponse.ok(padresAlumnosService.crearPadresAlumnos(padresAlumnos));
+	@PostMapping("/secured/v1/padresAlumnos/create")
+    public ResponseEntity<?> createAlumno(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
+    	return padresAlumnosService.create(padresAlumnos);
     }
 	
-	@PostMapping("/v1/padresAlumnosEliminar")
-    public ResponseEntity<?> eliminarpadresAlumnos(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
-    	return GenericResponse.ok(padresAlumnosService.elimanarPadresAlumnos(padresAlumnos));
+	@PostMapping("/secured/v1/padresAlumnos/delete")
+    public ResponseEntity<?> delete(@RequestBody PadresAlumnos padresAlumnos) throws Exception {
+    	return padresAlumnosService.delete(padresAlumnos);
     }
 	
 }

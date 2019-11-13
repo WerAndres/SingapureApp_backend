@@ -5,9 +5,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.Interacciones;
 import com.singapure.app.services.InteraccionesService;
 
@@ -15,26 +18,39 @@ import com.singapure.app.services.InteraccionesService;
 public class InteraccionesController {
 	
 	@Autowired
-	InteraccionesService interaccionesService;
+	private InteraccionesService interaccionesService;
 
-	@GetMapping("/v1/Interacciones")
-    public ResponseEntity<?> consultarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.consultarInteracciones(interacciones));
+	@GetMapping("/v1/interacciones")
+    public ResponseEntity<?> getAllInteracciones() throws Exception {
+    	return interaccionesService.getAllInteracciones();
     }
 	
-	@PostMapping("/v1/InteraccionesCrear")
-    public ResponseEntity<?> crearInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.crearInteracciones(interacciones));
+	
+	@RequestMapping(value = "/secured/v1/interacciones/filterEmail", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<?> getAllFilterEmail(@RequestParam String email) throws Exception {
+    	return interaccionesService.getAllfilterEmail(email);
     }
 	
-	@PostMapping("/v1/InteraccionesActualiza")
+	@RequestMapping(value = "/secured/v1/interacciones/filterTema", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<?> getAllFilterTema(@RequestParam String idTema) throws Exception {
+    	return interaccionesService.getAllfilterTema(idTema);
+    }
+	
+	@PostMapping("/secured/v1/interacciones/create")
+    public ResponseEntity<?> create(@RequestBody Interacciones interacciones) throws Exception {
+    	return interaccionesService.create(interacciones);
+    }
+	
+	@PostMapping("/v1/interacciones/update")
     public ResponseEntity<?> actualizarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.actualizarInteracciones(interacciones));
+    	return interaccionesService.update(interacciones);
     }
 	
-	@PostMapping("/v1/InteraccionesEliminar")
-    public ResponseEntity<?> eliminarInteracciones(@RequestBody Interacciones interacciones) throws Exception {
-    	return GenericResponse.ok(InteraccionesService.eliminarInteracciones(interacciones));
+	@PostMapping("/v1/interacciones/delete")
+    public ResponseEntity<?> delete(@RequestBody Interacciones interacciones) throws Exception {
+    	return interaccionesService.delete(interacciones);
     }
 
 }
