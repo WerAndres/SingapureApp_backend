@@ -31,16 +31,14 @@ public class Actividades implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_acti")
-	private Integer idActi;
+	private Long idActividad;
 
 	@Column(name="fecha_act")
 	private Date fechaAct;
 
 	@Column(name="fecha_crea")
 	private Date fechaCrea;
-
-	private String nombre;
-
+	
 	//bi-directional many-to-one association to Tema
 	@ManyToOne
 	@JoinColumn(name="id_tema")
@@ -50,5 +48,19 @@ public class Actividades implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="tipo_acti")
 	private TiposActividades tiposActividades;
+
+	@Column(name="url_principal")
+	private String urlPrincipal;
+	
+	@Column(name="url_alternativa")
+	private String urlAlternativa;
+	
+	@Column(name="texto")
+	private String texto;
+	
+	@Column(name="nombre")
+	private String nombre;
+
+
 
 }
