@@ -10,7 +10,7 @@ import com.singapure.app.models.TiposActividades;
 @Repository
 public interface TiposActividadesRepository extends JpaRepository<TiposActividades, String>{
 
-	@Query("select tp from TiposActividades tp where tp.idTipoAct = :idTipoAct")
-	TiposActividades findByIdAct(@Param("idTipoAct") Integer idTipoAct);
+	@Query("select tp from TiposActividades tp where tp.idTipoActividad = :idTipoActividad")
+	TiposActividades findByIdAct(@Param("idTipoActividad") Long idTipoActividad);
 
 }

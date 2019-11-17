@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.CodeStatus;
 import com.singapure.app.models.Interacciones;
-import com.singapure.app.models.Materias;
 import com.singapure.app.models.Usuarios;
 import com.singapure.app.repo.InteraccionesRepository;
 import com.singapure.app.repo.UsuariosRepository;

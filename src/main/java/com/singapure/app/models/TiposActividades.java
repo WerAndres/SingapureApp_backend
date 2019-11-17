@@ -28,13 +28,13 @@ public class TiposActividades implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="id_tipo_act")
-	private Integer idTipoAct;
+	private Long idTipoActividad;
 
 	@Column(name="fecha_act")
-	private Date fechaAct;
+	private Date fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Date fechaCrea;
+	private Date fechaCreacion;
 
 	@Column(name="nombre")
 	private String nombre;
