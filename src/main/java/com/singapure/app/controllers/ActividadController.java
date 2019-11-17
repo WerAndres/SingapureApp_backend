@@ -5,6 +5,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.singapure.app.models.Actividades;
@@ -19,6 +23,18 @@ public class ActividadController {
 	@GetMapping("/v1/actividades")
     public ResponseEntity<?> getAll() throws Exception {
     	return actividadesService.getAllActividades();
+    }
+	
+	@RequestMapping(value = "/secured/v1/actividades/filterEmail", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<?> getAllFilterEmail(@RequestParam String email) throws Exception {
+    	return actividadesService.getAllfilterEmail(email);
+    }
+	
+	@RequestMapping(value = "/secured/v1/actividades/filterTema", method = RequestMethod.GET)
+	@ResponseBody
+    public ResponseEntity<?> getAllFilterTema(@RequestParam String idTema) throws Exception {
+    	return actividadesService.getAllfilterTema(idTema);
     }
 	
 	@PostMapping("/v1/actividades/create")

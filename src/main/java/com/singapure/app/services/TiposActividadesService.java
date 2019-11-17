@@ -50,11 +50,11 @@ public class TiposActividadesService {
 
 	public ResponseEntity<?> create(TiposActividades tipoActividad) {
 		
-		if(tipoActividad.getFechaAct()== null) {
-			tipoActividad.setFechaAct(new Date());
+		if(tipoActividad.getFechaActualizacion()== null) {
+			tipoActividad.setFechaActualizacion(new Date());
 		}
-		if(tipoActividad.getFechaCrea() == null) {
-			tipoActividad.setFechaCrea(new Date());
+		if(tipoActividad.getFechaCreacion() == null) {
+			tipoActividad.setFechaCreacion(new Date());
 		}
 		
 		try {
