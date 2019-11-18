@@ -71,13 +71,28 @@ public class ActividadesService {
 	}
 	
 	public ResponseEntity<?> update(Actividades actividad) {
-		
-		Actividades acti = actividadesRepository.save(actividad);
-		if(acti == null){
-			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+		try {
+			Actividades actividadesOld = actividadesRepository.findByIdActividad(actividad.getIdActividad());
+			if(actividadesOld == null) {
+				return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_TOPIC_NO_EXIST,
+						HttpStatus.BAD_REQUEST, CodeStatus.ERROR_TOPIC_NO_EXIST_TEXT, HttpStatus.BAD_REQUEST + "");
+			}
+			
+			Temas temaOld = temasRepository.findByIdtema(actividad.getTema().getIdTema());
+			if(temaOld == null) {
+				return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.CLASS_NOT_EXISTS,
+						HttpStatus.BAD_REQUEST, CodeStatus.CLASS_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
+			}
+			actividad.setFechaActualizacion(new Date());
+			actividad.setFechaCreacion(actividadesOld.getFechaCreacion());
+			actividad.setTema(temaOld);
+			Actividades actividadesNew = actividadesRepository.save(actividad);
+			return GenericResponse.ok(actividadesNew);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_UPDATE,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_UPDATE_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
-		return GenericResponse.ok(actividad);
 	}
 
 	public ResponseEntity<?> delete(Actividades actividad) {
@@ -96,11 +111,11 @@ public class ActividadesService {
 		actividad.setTiposActividades(tipoAct);
 		actividad.setTema(tema);
 		
-		if(actividad.getFechaAct()== null) {
-			actividad.setFechaAct(new Date());
+		if(actividad.getFechaActualizacion()== null) {
+			actividad.setFechaActualizacion(new Date());
 		}
-		if(actividad.getFechaCrea() == null) {
-			actividad.setFechaCrea(new Date());
+		if(actividad.getFechaCreacion() == null) {
+			actividad.setFechaCreacion(new Date());
 		}
 		try {
 			

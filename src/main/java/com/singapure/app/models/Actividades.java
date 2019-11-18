@@ -34,10 +34,10 @@ public class Actividades implements Serializable {
 	private Long idActividad;
 
 	@Column(name="fecha_act")
-	private Date fechaAct;
+	private Date fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Date fechaCrea;
+	private Date fechaCreacion;
 	
 	//bi-directional many-to-one association to Tema
 	@ManyToOne

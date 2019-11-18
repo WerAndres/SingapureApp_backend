@@ -25,4 +25,7 @@ public interface ActividadesRepository extends JpaRepository<Actividades, String
 	@Query("select a from Actividades a where a.tema.idTema = :idTema")
 	List<Actividades> findByidTema(@Param("idTema") Long idTema);
 	
+	@Query("select a from Actividades a where a.idActividad = :idActividad")
+	Actividades findByIdActividad(@Param("idActividad") Long idActividad);
+	
 }
