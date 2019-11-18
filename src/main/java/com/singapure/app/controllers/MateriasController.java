@@ -20,7 +20,7 @@ public class MateriasController {
 	@Autowired
 	MateriasService materiasService;
 
-	@GetMapping("/v1/materias")
+	@GetMapping("/secured/v1/materias")
     public ResponseEntity<?> getAll() throws Exception {
     	return materiasService.getAll();
     }
@@ -36,12 +36,12 @@ public class MateriasController {
     	return materiasService.getById(idCurso);
     }
 	
-	@PostMapping("/v1/materias/crear")
+	@PostMapping("/secured/v1/materias/crear")
     public ResponseEntity<?> create(@RequestBody Materias Materias) throws Exception {
     	return materiasService.create(Materias);
     }
 	
-	@PostMapping("/v1/materias/actualizar")
+	@PostMapping("/secured/v1/materias/actualizar")
     public ResponseEntity<?> update(@RequestBody Materias Materias) throws Exception {
     	return materiasService.update(Materias);
     }

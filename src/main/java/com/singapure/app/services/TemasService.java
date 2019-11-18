@@ -10,8 +10,10 @@ import org.springframework.stereotype.Service;
 
 import com.singapure.app.dto.GenericResponse;
 import com.singapure.app.models.CodeStatus;
+import com.singapure.app.models.Materias;
 import com.singapure.app.models.Temas;
 import com.singapure.app.models.Usuarios;
+import com.singapure.app.repo.MateriasRepository;
 import com.singapure.app.repo.PadresAlumnosRepository;
 import com.singapure.app.repo.TemasRepository;
 import com.singapure.app.repo.UsuariosRepository;
@@ -21,6 +23,9 @@ public class TemasService {
 
 	@Autowired
 	private TemasRepository temasRepository;
+	
+	@Autowired
+	private MateriasRepository materiasRepository;
 		
 	@Autowired
 	private PadresAlumnosRepository padresAlumnosRepository;
@@ -63,12 +68,28 @@ public class TemasService {
 	}
 	
 	public ResponseEntity<?> update(Temas tema) {
-		Temas tem = temasRepository.save(tema);
-		if(tem == null){
-			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_SAVE,
-					HttpStatus.BAD_REQUEST, HttpStatus.BAD_REQUEST + "", CodeStatus.ERROR_SAVE_TEXT);
+		try {
+			Temas temasOld = temasRepository.findByIdtema(tema.getIdTema());
+			if(temasOld == null) {
+				return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_TOPIC_NO_EXIST,
+						HttpStatus.BAD_REQUEST, CodeStatus.ERROR_TOPIC_NO_EXIST_TEXT, HttpStatus.BAD_REQUEST + "");
+			}
+			
+			Materias materiaOld = materiasRepository.findByIdMateria(tema.getMateria().getIdMateria());
+			if(materiaOld == null) {
+				return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.CLASS_NOT_EXISTS,
+						HttpStatus.BAD_REQUEST, CodeStatus.CLASS_NOT_EXISTS_TEXT, HttpStatus.BAD_REQUEST + "");
+			}
+			tema.setFechaActualizacion(new Date());
+			tema.setFechaCreacion(temasOld.getFechaCreacion());
+			tema.setMateria(materiaOld);
+			Temas temasNew = temasRepository.save(tema);
+			return GenericResponse.ok(temasNew);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return GenericResponse.generic(CodeStatus.HTTP_BAD_REQUEST, CodeStatus.ERROR_UPDATE,
+					HttpStatus.BAD_REQUEST, CodeStatus.ERROR_UPDATE_TEXT, HttpStatus.BAD_REQUEST + "");
 		}
-		return GenericResponse.ok(tema);
 	}
 
 	public ResponseEntity<?> delete(Temas tema) {
@@ -78,12 +99,11 @@ public class TemasService {
 
 	public ResponseEntity<?> create(Temas tema) {
 		
-		
-		if(tema.getFechaAct()== null) {
-			tema.setFechaAct(new Date());
+		if(tema.getFechaActualizacion()== null) {
+			tema.setFechaActualizacion(new Date());
 		}
-		if(tema.getFechaCrea() == null) {
-			tema.setFechaCrea(new Date());
+		if(tema.getFechaCreacion() == null) {
+			tema.setFechaCreacion(new Date());
 		}
 		
 		try {
