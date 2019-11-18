@@ -20,7 +20,7 @@ public class ActividadController {
 	@Autowired
 	ActividadesService actividadesService;
 
-	@GetMapping("/v1/actividades")
+	@GetMapping("/secured/v1/actividades")
     public ResponseEntity<?> getAll() throws Exception {
     	return actividadesService.getAllActividades();
     }
@@ -37,12 +37,12 @@ public class ActividadController {
     	return actividadesService.getAllfilterTema(idTema);
     }
 	
-	@PostMapping("/v1/actividades/create")
+	@PostMapping("/secured/v1/actividades/crear")
     public ResponseEntity<?> crearActividades(@RequestBody Actividades actividad) throws Exception {
     	return actividadesService.create(actividad);
     }
 	
-	@PostMapping("/v1/actividades/update")
+	@PostMapping("/secured/v1/actividades/actualizar")
     public ResponseEntity<?> actualizarActividades(@RequestBody Actividades actividad) throws Exception {
     	return actividadesService.update(actividad);
     }

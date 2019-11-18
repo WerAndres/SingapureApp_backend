@@ -17,9 +17,9 @@ public class TiposActividadesController {
 	@Autowired
 	TiposActividadesService tiposActividadesService;
 
-	@GetMapping("/v1/tipoActividades")
+	@GetMapping("/secured/v1/tipoActividades")
     public ResponseEntity<?> consultarActividades() throws Exception {
-    	return GenericResponse.ok(tiposActividadesService.getAllTiposActividades());
+    	return tiposActividadesService.getAllTiposActividades();
     }
 	
 	@PostMapping("/v1/tipoActividades/create")
