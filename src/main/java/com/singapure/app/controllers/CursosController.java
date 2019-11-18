@@ -25,17 +25,17 @@ public class CursosController {
     	return cursosService.getAllCursos();
     }
 		
-	@PostMapping("/v1/cursos/create")
+	@PostMapping("/v1/cursos/crear")
     public ResponseEntity<?> create(@RequestBody Cursos cursos) throws Exception {
     	return cursosService.create(cursos);
     }
 	
-	@PostMapping("/v1/cursos/update")
+	@PostMapping("/v1/cursos/actualizar")
     public ResponseEntity<?> update(@RequestBody Cursos cursos) throws Exception {
     	return cursosService.update(cursos);
     }
 	
-	@PostMapping("/v1/cursos/delete")
+	@PostMapping("/v1/cursos/eliminar")
     public ResponseEntity<?> delete(@RequestBody Cursos cursos) throws Exception {
     	return cursosService.delete(cursos);
     }

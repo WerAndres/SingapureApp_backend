@@ -33,10 +33,10 @@ public class Temas implements Serializable {
 	private Long idTema;
 
 	@Column(name="fecha_act")
-	private Date fechaAct;
+	private Date fechaActualizacion;
 
 	@Column(name="fecha_crea")
-	private Date fechaCrea;
+	private Date fechaCreacion;
 
 	@Column(name="nombre")
 	private String nombre;

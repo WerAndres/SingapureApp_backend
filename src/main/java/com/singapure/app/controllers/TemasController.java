@@ -21,7 +21,7 @@ public class TemasController {
 	@Autowired
 	TemasService temasService;
 
-	@GetMapping("/v1/temas")
+	@GetMapping("/secured/v1/temas")
     public ResponseEntity<?> getAll() throws Exception {
     	return temasService.getAllTemas();
     }
@@ -33,14 +33,14 @@ public class TemasController {
     }
 	
 	
-	@PostMapping("/v1/temas/create")
+	@PostMapping("/secured/v1/temas/crear")
     public ResponseEntity<?> crearTemas(@RequestBody Temas tema) throws Exception {
-    	return GenericResponse.ok(temasService.create(tema));
+    	return temasService.create(tema);
     }
 	
-	@PostMapping("/v1/temas/update")
+	@PostMapping("/secured/v1/temas/actualizar")
     public ResponseEntity<?> ActualizarTemas(@RequestBody Temas tema) throws Exception {
-    	return GenericResponse.ok(temasService.update(tema));
+    	return temasService.update(tema);
     }
 	
 	@PostMapping("/v1/temas/delete")

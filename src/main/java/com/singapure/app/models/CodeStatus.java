@@ -33,6 +33,15 @@ public class CodeStatus {
 	public static Integer ERROR_DELETE					= 991;
 	public static String  ERROR_DELETE_TEXT				= "Error al borrar";
 	
+	public static Integer ERROR_UPDATE					= 990;
+	public static String  ERROR_UPDATE_TEXT				= "Error al actualizar";
+	
+	public static Integer ERROR_COURSE_NO_EXIST  		= 989;
+	public static String  ERROR_COURSE_NO_EXIST_TEXT	= "Curso no existe";
+	
+	public static Integer ERROR_TOPIC_NO_EXIST  		= 98;
+	public static String  ERROR_TOPIC_NO_EXIST_TEXT	= "Tema no existe";
+	
 	//CODIGOS EXITOSOS HTTP
 	public static Integer HTTP_OK 						= 200;
 	public static Integer HTTP_CREATED					= 202;
